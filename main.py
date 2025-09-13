@@ -54,7 +54,7 @@ def download_task(stage_name, testcase_name, path_key, file_path):
     """Single download task for threading"""
     encoded_file_path = urllib.parse.quote(file_path, safe='')
     download_url = f"{BASE_URL}/file-content?stageName={stage_name}&filePath={encoded_file_path}"
-    local_path = os.path.join(stage_name, testcase_name, os.path.basename(file_path))
+    local_path = os.path.join("..", "@official", stage_name, testcase_name, os.path.basename(file_path))
     
     thread_safe_print(f"Downloading {local_path}")
     success = download_file_content(download_url, local_path)
@@ -91,7 +91,7 @@ def main():
                 testcase_name = testcase["name"]
                 
                 # Save testcase info (non-threaded as it's quick)
-                testcase_info_path = os.path.join(stage_name, testcase_name, "testcase_info.json")
+                testcase_info_path = os.path.join("..", "@official", stage_name, testcase_name, "testcase_info.json")
                 print(f"Saving testcase info for {testcase_name}")
                 save_testcase_info(testcase, testcase_info_path)
 
